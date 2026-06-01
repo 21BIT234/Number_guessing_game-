@@ -1,0 +1,47 @@
+function createGame() {
+
+    const secretNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    return function guessNumber() {
+
+        while (true) {
+
+            const userInput = prompt("Guess a number between 1 and 100:");
+
+            if (userInput === null) {
+                console.log("Game cancelled.");
+                break;
+            }
+
+            const guess = Number(userInput);
+            attempts++;
+
+            if (isNaN(guess)) {
+                console.log("Please enter a valid number.");
+                continue;
+            }
+
+            if (guess < secretNumber) {
+                console.log("Too Low!");
+            }
+            else if (guess > secretNumber) {
+                console.log("Too High!");
+            }
+            else {
+                console.log(
+                    `Correct! The number was ${secretNumber}.`
+                );
+
+                console.log(
+                    `You guessed it in ${attempts} attempts.`
+                );
+
+                break;
+            }
+        }
+    };
+}
+
+const game = createGame();
+game();
